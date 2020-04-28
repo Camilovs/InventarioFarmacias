@@ -5,26 +5,50 @@
  */
 package csv;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Camilo
  */
-public class LectorCSV extends Object implements Closeable, Iterable<String[]>{
+public class LectorCSV{
     
-    ArrayList<String> datoUni;
-    @Override
-    public void close() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    ArrayList<String> datoUni;  
+    BufferedReader br;
+    String line;
+    public LectorCSV(){
+        datoUni = new ArrayList<>();
+        line = "";
+    }
+    public void readCSV(String nombre) throws IOException{   
+        
+            br = new BufferedReader(new FileReader(nombre));
+            while ((line = br.readLine())!=null){
+                datoUni.add(line);
+            }
+        
+    }
+    
+    public void printDatoUni(){
+        System.out.println("-----------------------");
+        for (String string : datoUni) {       
+            System.out.println(string);        
+        }
+    }
+    public ArrayList<String> getDatoUni() {
+        return datoUni;
     }
 
-    @Override
-    public Iterator<String[]> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setDatoUni(ArrayList<String> datoUni) {
+        this.datoUni = datoUni;
     }
     
 }
